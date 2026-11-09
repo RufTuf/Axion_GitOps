@@ -1,0 +1,14 @@
+replicaCount: 4
+
+image:
+  repository: axionacr1.azurecr.io/axiondatasimulatorgit
+  tag: "522"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: false
