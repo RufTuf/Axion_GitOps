@@ -6,9 +6,6 @@ trigger: none
 pool:
   name: Default
 
-variables:
-- group: GitOps-Variables
-
 stages:
 
 # ==================================================
