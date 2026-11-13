@@ -1,8 +1,12 @@
+
 apiVersion: apps/v1
 kind: Deployment
 
 metadata:
   name: axion-ui
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: axion-ui
 
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -18,10 +22,8 @@ spec:
 
     spec:
       containers:
-        - name: axion-container
-
+        - name: axion-ui
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           ports:
