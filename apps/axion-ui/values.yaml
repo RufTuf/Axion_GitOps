@@ -2,7 +2,7 @@ replicaCount: 4
 
 image:
   repository: axionacr1.azurecr.io/axionui
-  tag: "522"
+  tag: "526"
   pullPolicy: IfNotPresent
 
 service:
