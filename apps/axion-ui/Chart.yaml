@@ -1,0 +1,11 @@
+apiVersion: v2
+
+name: axion-ui
+
+description: Axion-ui Helm Chart
+
+type: application
+
+version: 0.1.0
+
+appVersion: "522"

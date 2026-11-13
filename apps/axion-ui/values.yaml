@@ -1,7 +1,7 @@
-replicaCount: 2
+replicaCount: 4
 
 image:
-  repository: axionacr1.azurecr.io/axiondatasimulatorgit
+  repository: axionacr1.azurecr.io/axionui
   tag: "522"
   pullPolicy: IfNotPresent
 

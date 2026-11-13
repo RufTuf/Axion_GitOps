@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: axion-data-simulator
+  name: axion-ui
 
 spec:
   replicas: {{ .Values.replicaCount }}
 
   selector:
     matchLabels:
-      app: axion-data-simulator
+      app: axion-ui
 
   template:
     metadata:
       labels:
-        app: axion-data-simulator
+        app: axion-ui
 
     spec:
       containers:
-        - name: data-simulator
+        - name: axion-container
 
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
 
