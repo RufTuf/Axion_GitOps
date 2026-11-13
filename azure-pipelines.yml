@@ -1,0 +1,66 @@
+name: axion-ui-deployment
+
+trigger:
+  - main
+
+pool:
+  name: Default
+
+variables:
+  dockerRegistryServiceConnection: 'e4b01a4e-4a33-4301-84b9-ecd192b84bfd'
+  imageRepository: 'axionui'
+  containerRegistry: 'axionacr1.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+stages:
+
+# ==================================================
+# Stage 2: Update GitOps Helm Values
+# ==================================================
+
+- stage: UpdateGitOps
+  displayName: Update GitOps Repository
+  dependsOn: Build
+
+  jobs:
+  - job: UpdateHelmValues
+    displayName: Update Helm Image Tag
+
+    steps:
+    - checkout: none
+
+    - bash: |
+        set -e
+
+        echo "Cloning GitOps repository"
+
+        git clone https://github.com/RufTuf/Axion_GitOps.git
+
+        cd GitOps
+
+        echo "Updating Helm image tag"
+
+        sed -i 's/tag: .*/tag: "$(Build.BuildId)"/' helm/axion-ui/values.yaml
+
+        git config user.email "azure-pipeline@axion.com"
+        git config user.name "Azure DevOps"
+
+        git add helm/axion-ui/values.yaml
+
+        if git diff --cached --quiet; then
+          echo "No changes detected"
+          exit 0
+        fi
+
+        git commit -m "Update Axion UI image to $(Build.BuildId)"
+
+        git push origin HEAD:main
+
+        echo "GitOps repository updated successfully"
+
+      displayName: Update GitOps Helm Values
+      env:
+        GITHUB_USERNAME: $(RufTuf)
+        GITHUB_PAT: $(https://github.com/RufTuf/Axion_GitOps)
+
