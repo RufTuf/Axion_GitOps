@@ -1,9 +1,10 @@
+
 replicaCount: 4
 
 image:
-  repository: axionacr1.azurecr.io/axionuigit
+  repository: axionacr1.azurecr.io/axionui
   tag: "561"
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: LoadBalancer
