@@ -3,7 +3,7 @@ replicaCount: 4
 
 image:
   repository: axionacr1.azurecr.io/axionuigit
-  tag: "559"
+  tag: "564"
   pullPolicy: Always
 
 service:
